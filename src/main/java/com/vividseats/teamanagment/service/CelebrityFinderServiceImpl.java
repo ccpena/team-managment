@@ -26,8 +26,8 @@ public class CelebrityFinderServiceImpl implements TeamMemberFinderService {
       MemberDTO second = queueCelebrities.poll();
       MemberDTO possibleCelebrity = null;
 
-
-      possibleCelebrity = firstMemberKnowsSecondMember(first, second) ? second : first;
+      possibleCelebrity = findPossibleCelebrityBetween(first,second);
+      
       if (doesntKnowAnyBody(possibleCelebrity)) {
         queueCelebrities.add(possibleCelebrity);
       }
@@ -39,7 +39,14 @@ public class CelebrityFinderServiceImpl implements TeamMemberFinderService {
 
   }
 
-  private boolean doesntKnowAnyBody(MemberDTO member) {
+
+private MemberDTO findPossibleCelebrityBetween(MemberDTO first, MemberDTO second) {
+	return firstMemberKnowsSecondMember(first, second) ? second  : 
+		   firstMemberKnowsSecondMember(second, first) ? first : null;
+}
+
+
+private boolean doesntKnowAnyBody(MemberDTO member) {
     if (member == null) {
       return false;
     }

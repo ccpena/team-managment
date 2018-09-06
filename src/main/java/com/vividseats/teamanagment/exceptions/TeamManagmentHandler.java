@@ -10,7 +10,7 @@ import org.springframework.web.context.request.WebRequest;
 @RestControllerAdvice
 public class TeamManagmentHandler {
 
-  @ExceptionHandler(value = {TeamNotFoundException.class})
+  @ExceptionHandler(value = {TeamNotFoundException.class, MemberNotFoundException.class})
   public ResponseEntity<Object> handleUserNotFound(Exception ex, WebRequest request) {
     ExceptionResponse exceptionResponse = new ExceptionResponse();
     exceptionResponse.setDate(LocalDate.now());

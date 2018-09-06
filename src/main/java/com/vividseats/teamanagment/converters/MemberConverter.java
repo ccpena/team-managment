@@ -5,12 +5,14 @@ import java.util.Optional;
 import java.util.Set;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.modelmapper.spi.MappingContext;
 import com.vividseats.teamanagment.domain.Member;
 import com.vividseats.teamanagment.domain.Team;
 import com.vividseats.teamanagment.dto.MemberDTO;
 
-public class MemberConverter implements ModelConverter<MemberDTO, Member> {
+public class MemberConverter
+    implements ModelConverter<MemberDTO, Member>, ModelCollectionsConverter<MemberDTO, Member> {
 
   private ModelMapper modelMapper = new ModelMapper();
 
@@ -63,6 +65,15 @@ public class MemberConverter implements ModelConverter<MemberDTO, Member> {
     Member Member = modelMapper.map(dto.get(), Member.class);
 
     return Member == null ? Optional.empty() : Optional.of(Member);
+  }
+
+  @Override
+  public Set<MemberDTO> convertTo(Set<Member> members) {
+    // Define the target type
+    java.lang.reflect.Type targetListType = new TypeToken<Set<MemberDTO>>() {}.getType();
+    Set<MemberDTO> membersDTO = modelMapper.map(members, targetListType);
+
+    return membersDTO;
   }
 
 }

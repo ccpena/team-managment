@@ -1,8 +1,8 @@
 package com.vividseats.teamanagment.service;
 
 import java.util.Optional;
-import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.vividseats.teamanagment.converters.ModelConverter;
 import com.vividseats.teamanagment.converters.TeamConverter;
 import com.vividseats.teamanagment.domain.Team;
@@ -10,7 +10,7 @@ import com.vividseats.teamanagment.dto.TeamDTO;
 import com.vividseats.teamanagment.repository.TeamRepository;
 
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class TeamServiceImpl implements TeamService {
 
   private TeamRepository teamRepository;
@@ -24,6 +24,7 @@ public class TeamServiceImpl implements TeamService {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public Optional<TeamDTO> findById(Long id) {
     Optional<Team> team = teamRepository.findById(id);
     return modelConverter.convertToDTO(team);

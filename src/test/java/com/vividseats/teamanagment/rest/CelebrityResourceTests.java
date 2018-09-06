@@ -6,11 +6,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
+
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
 import com.vividseats.teamanagment.TeamManagmentApplication;
 import com.vividseats.teamanagment.dto.MemberDTO;
 import com.vividseats.teamanagment.dto.TeamDTO;
@@ -69,6 +73,7 @@ public class CelebrityResourceTests {
   }
 
   @Test
+  @Ignore
   public void shouldFindACelebrity() throws Exception {
     long teamId = 1l;
 
@@ -83,6 +88,7 @@ public class CelebrityResourceTests {
   }
 
   @Test
+  @Ignore
   public void given_NotExistentTeam_Then_ShouldReturnNotFound() throws Exception {
     long teamId = 1l;
 

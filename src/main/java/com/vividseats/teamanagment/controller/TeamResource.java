@@ -134,7 +134,7 @@ public class TeamResource {
   }
 
 
-  @GetMapping("/{idTeam}/celebrity")
+  //@GetMapping("/{idTeam}/celebrity")
   public ResponseEntity<TeamTestCaseDTO> findCelebrity(@PathVariable long idTeam) {
 
     Optional<TeamDTO> team = teamService.findById(idTeam);
@@ -142,6 +142,8 @@ public class TeamResource {
     if (!team.isPresent()) {
       throw new TeamNotFoundException(String.format("The team %d doesn't exists", idTeam));
     }
+
+    team.get().setMembers(memberService.findByTeamId(idTeam));
 
     Optional<MemberDTO> celebrity = finderService.findOf(team.get());
     TeamTestCaseDTO teamTest = getTeamTestCaseBean();
@@ -152,7 +154,7 @@ public class TeamResource {
   }
 
 
-  // @PostMapping("/")
+  //@PostMapping("/")
   public ResponseEntity<TeamDTO> createATeam(@RequestBody TeamDTO teamDTO) {
 
     Optional<TeamDTO> teamCreated = teamService.create(teamDTO);
@@ -171,7 +173,7 @@ public class TeamResource {
 
   }
 
-  // @PostMapping("/{idTeam}/members")
+  //@PostMapping("/{idTeam}/members")
   public ResponseEntity<MemberDTO> createAMemberOfATeam(@RequestBody MemberDTO memberDTO,
       @PathVariable long idTeam) {
     TeamDTO teamDTO = new TeamDTO();

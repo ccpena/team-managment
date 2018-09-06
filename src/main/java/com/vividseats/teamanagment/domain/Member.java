@@ -16,21 +16,25 @@ import lombok.Data;
 @Data
 public class Member {
 
+  public Member() {}
+
+  public Member(long id) {
+    this.memberId = id;
+  }
+
   @Id
-  @Column(name = "MEMBER_ID")
+  @Column(name = "MEMBER_ID", nullable = false)
   private Long memberId;
 
-  @ManyToOne
-  @JoinColumn(name = "TEAM_ID")
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "TEAM_ID", insertable = true, updatable = true)
   private Team team;
 
 
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany(cascade = CascadeType.MERGE)
   @JoinTable(name = "known_members", joinColumns = @JoinColumn(name = "MEMBER_ID"),
       inverseJoinColumns = @JoinColumn(name = "KNOWN_ID"))
   private Set<Member> knows = new HashSet<Member>();;
 
 
-  @ManyToMany(mappedBy = "knows")
-  private Set<Member> teammates = new HashSet<Member>();
 }
