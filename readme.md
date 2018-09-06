@@ -1,6 +1,19 @@
-# Find the celebrity
+# Team Managment
 
+This project was built to solve the following problem:
+
+```
 In a team of n people, a celebrity is known by everyone but he/she doesn't know anybody.
+```
+
+## Pre-requisites
+
+The solution was built with Java JDK 8 and Spring Boot 2.0.4.RELEASE. In order to run the solution is necessary to verify in the system:
+
+
+* The JAVA HOME environment variable should be set to a Java 8 installation. The version can be verified executing the next command ```java –version```
+* Maven have to be installed in the system. To verify it, you can run the command ```mvn –version```
+
 
 ## Application Layer
 
@@ -20,7 +33,6 @@ This resource will invoke to TeamMemberFinderService service in order to find th
 
 It's implementation class for an interface called TeamMemberFinderService, has the logic to find a celebrity of a team given.
 
-
 ###### **Request Info**
 
 + **Http Method:** POST
@@ -29,7 +41,9 @@ It's implementation class for an interface called TeamMemberFinderService, has t
 + **Headers:**  multipart/form-data
 + **Request PayLoad:**  Content-Type: text/plain
 
-## File of Test Cases
+## How Can I Test it?
+
+You need to upload a file with the test cases. This file will contain the data of the members of a team. The input format will explain what it means.
 
 ### Input Format 
 
@@ -95,8 +109,23 @@ In the first team, the member 1 doesn't have a known. (celebrity). The others me
 
 In the second team, all members known a member with ID 1. There isn't a celebrity.
 
+## Running the solution
+
+locate in the root folder of the project and run the following commands: 
+
+```
+mvn compile
+mvn spring-boot:run
+```
+
+Open your browser and copy the next URL:
+
+```
+http://localhost:8585/swagger-ui.html
+```
 
 ## Uploading a Test File
+
 
 The port defined for the server is 8585.
 
@@ -107,9 +136,11 @@ The documentation of the rest service is exposed using Swagger UI.
 http://localhost:8585/swagger-ui.html
 ```
 
+Then, we need to find the resource ```POST /v1/teams/upload/filterByCelebrity``` in order to upload the file with the test cases.
+
 ![Can't load](doc/uploadfile_swagger.png)
 
-[Data Test Cases](doc/data.txt)
+Then, try it out!
 
 
-
+[Data Test Cases Example](doc/data.txt)
